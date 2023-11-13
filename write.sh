@@ -10,9 +10,9 @@ KV="${2:-$FROM}"
 
 pushd "$FROM"
 for k in $(find  -type f); do
-  key=${KV}${k#.}
+  key=${k#.}
   echo $key
-  vault write "${key}" @"${k}"
+  vault kv put -mount "$KV" "${key}" @"${k}"
 done
 
 popd
